@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+	</head>
+	<script src="js/jquery-1.11.3.min.js"></script>
+	<script type="text/javascript">
+	            var ws;
+            var url = "ws://10.17.255.114:5510";
+		$(document).ready(function(){
+			
+			  if ("WebSocket" in window) {
+                    ws = new WebSocket(url);
+                }
+                else if ("MozWebSocket" in window) {
+                    ws = new MozWebSocket(url);
+                }
+                else
+                alert("浏览器版本过低，请升级您的浏览器。\r\n浏览器要求：IE10+/Chrome14+/FireFox7+/Opera11+");
+				  ws.onopen = function () {
+                    console.log("页面已连接")
+                    ws.send("V:页面已链接");
+                }
+				  ws.onclose = function () {
+                    alert("与服务器断开连接,请刷新网络")
+                } 
+                 ws.onerror = function () {
+                    alert("数据传送出错!")
+                }
+                  ws.onmessage = function (receiveMsg) {
+                    alert(receiveMsg.data) 
+                }
+
+		});
+	
+	</script>
+	<body>
+	</body>
+</html>
